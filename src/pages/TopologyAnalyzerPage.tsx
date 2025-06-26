@@ -266,16 +266,16 @@ const TopologyAnalyzer = () => {
                                                     ?.proposed_svg_url
                                             }
                                         />
-                                        <MermaidViewer
+                                        {/* <MermaidViewer
                                             code={result.diagrams?.comparison}
                                             title="Comparison View"
-                                        />
-                                        <pre className="bg-gray-900 p-4 rounded mb-4">
+                                        /> */}
+                                        {/* <pre className="bg-gray-900 p-4 rounded mb-4">
                                             {result.diagrams?.original}
                                         </pre>
                                         <pre className="bg-gray-900 p-4 rounded mb-4">
                                             {result.diagrams?.modified}
-                                        </pre>
+                                        </pre> */}
                                         <pre className="bg-gray-900 p-4 rounded">
                                             {result.diagrams?.comparison}
                                         </pre>
@@ -507,7 +507,7 @@ const TopologyAnalyzer = () => {
                                 </AccordionItem>
                             </Accordion>
 
-                            {/* 📥 Download Button */}
+                            {/* Download Button */}
                             <Button
                                 onClick={() => {
                                     const blob = new Blob(

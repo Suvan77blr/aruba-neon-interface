@@ -13,6 +13,7 @@ import UrlListIngestionPage from "./pages/UrlListIngestionPage";
 
 import RagQueryPage from "./pages/RagQueryPage";
 import TopologyAnalyzer from "./pages/TopologyAnalyzerPage";
+import AdminPanel from "./pages/AdminPanel";
 
 const queryClient = new QueryClient();
 
@@ -24,9 +25,13 @@ const App = () => (
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Index />} />
+                    <Route path="/admin" element={<AdminPanel />} />
                     {/* <Route path="/query-documentation" element={<QueryDocumentationPage />} /> */}
                     <Route path="/query-rag" element={<RagQueryPage />} />
-                    <Route path="/topology-analyzer" element={<TopologyAnalyzer />} />
+                    <Route
+                        path="/topology-analyzer"
+                        element={<TopologyAnalyzer />}
+                    />
                     <Route
                         path="/vector-database"
                         element={<VectorDatabasePage />}

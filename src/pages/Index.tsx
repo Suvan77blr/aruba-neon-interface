@@ -13,6 +13,8 @@ import {
     Network,
 } from "lucide-react";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const Index = () => {
     const [activeService, setActiveService] = useState<string | null>(null);
 
@@ -125,7 +127,7 @@ const Index = () => {
                         <p>
                             • <strong>Base API URL:</strong>{" "}
                             <code className="bg-gray-800 px-2 py-1 rounded">
-                                // Insert your base API URL here
+                                {API_BASE_URL}
                             </code>
                         </p>
                         <p>
