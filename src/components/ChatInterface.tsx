@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useRef, useEffect } from "react";
-import { Send, User, Loader2, ImageIcon } from "lucide-react";
+import { Send, User, Loader2, ImageIcon, CloudCog } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -38,7 +38,7 @@ const services = [
         description: "Query along with the network topology",
         icon: Network,
         color: "neon-green",
-        apiEndpoint: "/topology-analyzer",
+        apiEndpoint: "/topology/analyze-topology",
     },
     {
         id: "web_search",
@@ -65,21 +65,21 @@ export const ChatInterface = () => {
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const chatContainerRef = useRef<HTMLDivElement>(null);
 
-    // const [input, setInput] = useState('');
-    const [file, setFile] = useState(null);
     const [service, setService] = useState("auto");
+    const [file, setFile] = useState<File | null>(null);
+    const [imageBase64, setImageBase64] = useState<string | null>(null);
 
     const filePreviewRef = useRef<HTMLDivElement>(null);
 
     const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+        // messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
     useEffect(() => {
         scrollToBottom();
     }, [messages]);
 
-    // /*
+    /*
     const handleSendMessage = async () => {
         if (!inputText.trim() || isLoading) return;
 
@@ -133,6 +133,31 @@ export const ChatInterface = () => {
     };
     // */
 
+    const handleSendMessage = async () => {
+        if (!inputText.trim() && !file) return;
+        setIsLoading(true);
+
+        const payload = buildPayload();
+        console.log(JSON.stringify(payload));
+        
+        try {
+            const response = await fetch(`${API_BASE_URL}/mcp/call_tool`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            });
+            const data = await response.json();
+            console.log(data);
+            
+            // Handle the response (e.g., add AI message to chat)
+        } catch (error) {
+            // Handle error
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    // NEED TO CONFIRM.
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file) return;
@@ -164,8 +189,42 @@ export const ChatInterface = () => {
         }
     };
 
-    // Find selected service details
-    // const selectedService = services_list.find(s => s.id === service);
+    const getAPIEndpoint = () => {
+        if (service === "auto") {
+            if (file) {
+                services.find((s) => s.id === "topology_analyzer")?.apiEndpoint;
+            }
+            return services.find((s) => s.id === "query_rag")?.apiEndpoint;
+        }
+        return services.find((s) => s.id === service)?.apiEndpoint;
+    };
+
+    const buildPayload = () => {
+        if (file && imageBase64) {
+            // Need to opt for Topology Analysis.
+            return {
+                name: 'analyze_topology',
+                arguments: {
+                    image_data: imageBase64.split(",")[1],
+                    replacement_query: inputText,
+                },
+                session: {},
+            };
+        }
+
+        // Standard tool query.
+        let toolName = service;
+        if (service === 'auto') {
+            toolName = 'query_documentation';
+        }
+        return {
+            name: toolName,
+            arguments: {
+                query: inputText,
+                vendor: 'aruba',
+            },
+        };
+    };
 
     return (
         <div className="glass-morphism rounded-xl overflow-hidden h-96 flex flex-col">
