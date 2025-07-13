@@ -6,28 +6,23 @@ export const Header = () => {
 
     return (
         <header className="glass-morphism border-b border-gray-800 sticky top-0 z-50">
-            <div className="container mx-auto px-4">
-                <div className="flex items-center justify-between h-16">
-                    {/* Logo */}
-                    <div className="flex items-center space-x-3">
-                        <img
-                            src="https://images.app.goo.gl/THBR8EKPQF8kvgzX8"
-                            alt="Aruba Logo"
-                            className="w-10 h-10 rounded-lg object-cover"
-                        />
-                        <div>
-                            <h1 className="text-xl font-bold neon-text">
-                                ARUBA
-                            </h1>
-                            <p className="text-xs text-gray-400">
-                                HPE Networks
-                            </p>
-                        </div>
+            <div className="flex justify-between items-center container mx-auto px-4 py-2">
+                {/* Left: Logo */}
+                <div className="flex items-center space-x-3">
+                    <img
+                        src="/Logo.jpg"
+                        alt="Aruba Logo"
+                        className="w-20 h-10 rounded-lg object-cover"
+                    />
+                    <div>
+                        <h1 className="text-xl font-bold neon-text">ARUBA</h1>
+                        <p className="text-xs text-gray-400">HPE Networks</p>
                     </div>
                 </div>
 
+                {/* Right: User Actions */}
                 {/* Desktop Navigation */}
-                <div className="hidden md:flex items-center space-x-4">
+                <div className="hidden md:flex items-center space-x-4 h-12">
                     <a
                         href="/admin"
                         className="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors"

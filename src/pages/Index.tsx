@@ -21,8 +21,8 @@ const Index = () => {
     const services = [
         {
             id: "query_rag",
-            title: "RAG Search",
-            description: "Search using the RAG Pipeline",
+            title: "Agentic RAG Search",
+            description: "Search using the Agentic RAG Pipeline",
             icon: Bot,
             color: "neon-red",
             apiEndpoint: "/query_rag",
@@ -35,47 +35,47 @@ const Index = () => {
             color: "neon-green",
             apiEndpoint: "/topology-analyzer",
         },
-        {
-            id: "query_documentation",
-            title: "Query Documentation",
-            description:
-                "Search through technical documentation and knowledge base",
-            icon: FileText,
-            color: "neon-blue",
-            apiEndpoint: "// Insert API URL for documentation queries here",
-        },
-        {
-            id: "search_vector_database",
-            title: "Vector Database Search",
-            description: "Semantic search through vector embeddings",
-            icon: Database,
-            color: "neon-cyan",
-            apiEndpoint: "// Insert API URL for vector database search here",
-        },
-        {
-            id: "scrape_url",
-            title: "URL Scraper",
-            description: "Extract and analyze content from web pages",
-            icon: Link,
-            color: "neon-green",
-            apiEndpoint: "// Insert API URL for URL scraping here",
-        },
-        {
-            id: "web_search",
-            title: "Web Search",
-            description: "Search the web for relevant information",
-            icon: Search,
-            color: "neon-purple",
-            apiEndpoint: "// Insert API URL for web search here",
-        },
-        {
-            id: "ingest_url_list",
-            title: "URL List Ingestion",
-            description: "Bulk process and ingest multiple URLs",
-            icon: Globe,
-            color: "neon-orange",
-            apiEndpoint: "// Insert API URL for URL list ingestion here",
-        },
+        // {
+        //     id: "query_documentation",
+        //     title: "Query Documentation",
+        //     description:
+        //         "Search through technical documentation and knowledge base",
+        //     icon: FileText,
+        //     color: "neon-blue",
+        //     apiEndpoint: "// Insert API URL for documentation queries here",
+        // },
+        // {
+        //     id: "search_vector_database",
+        //     title: "Vector Database Search",
+        //     description: "Semantic search through vector embeddings",
+        //     icon: Database,
+        //     color: "neon-cyan",
+        //     apiEndpoint: "// Insert API URL for vector database search here",
+        // },
+        // {
+        //     id: "scrape_url",
+        //     title: "URL Scraper",
+        //     description: "Extract and analyze content from web pages",
+        //     icon: Link,
+        //     color: "neon-green",
+        //     apiEndpoint: "// Insert API URL for URL scraping here",
+        // },
+        // {
+        //     id: "web_search",
+        //     title: "Web Search",
+        //     description: "Search the web for relevant information",
+        //     icon: Search,
+        //     color: "neon-purple",
+        //     apiEndpoint: "// Insert API URL for web search here",
+        // },
+        // {
+        //     id: "ingest_url_list",
+        //     title: "URL List Ingestion",
+        //     description: "Bulk process and ingest multiple URLs",
+        //     icon: Globe,
+        //     color: "neon-orange",
+        //     apiEndpoint: "// Insert API URL for URL list ingestion here",
+        // },
     ];
 
     return (
@@ -94,6 +94,17 @@ const Index = () => {
                     <div className="w-32 h-1 bg-gradient-to-r from-neon-blue to-neon-cyan mx-auto rounded-full"></div>
                 </div>
 
+                {/* Chat Interface */}
+                <div className="mb-8">
+                    <div className="flex items-center gap-3 mb-6">
+                        <MessageCircle className="w-8 h-8 text-neon-blue" />
+                        <h2 className="text-3xl font-bold neon-text">
+                            AI Assistant
+                        </h2>
+                    </div>
+                    <ChatInterface />
+                </div>
+
                 {/* Services Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                     {services.map((service, index) => (
@@ -107,21 +118,10 @@ const Index = () => {
                     ))}
                 </div>
 
-                {/* Chat Interface */}
-                <div className="mb-8">
-                    <div className="flex items-center gap-3 mb-6">
-                        <MessageCircle className="w-8 h-8 text-neon-blue" />
-                        <h2 className="text-3xl font-bold neon-text">
-                            AI Assistant
-                        </h2>
-                    </div>
-                    <ChatInterface />
-                </div>
-
                 {/* API Integration Notes */}
                 <div className="glass-morphism rounded-xl p-6 mt-12">
                     <h3 className="text-xl font-bold text-neon-blue mb-4">
-                        🔧 API Integration Points
+                        API Integration Points
                     </h3>
                     <div className="space-y-2 text-sm text-gray-300">
                         <p>
@@ -130,28 +130,28 @@ const Index = () => {
                                 {API_BASE_URL}
                             </code>
                         </p>
-                        <p>
+                        {/* <p>
                             • <strong>Authentication:</strong>{" "}
                             <code className="bg-gray-800 px-2 py-1 rounded">
                                 // Add your API authentication headers here
                             </code>
-                        </p>
-                        <p>
+                        </p> */}
+                        {/* <p>
                             • <strong>Chat Endpoint:</strong>{" "}
                             <code className="bg-gray-800 px-2 py-1 rounded">
                                 // Insert chatbot API endpoint here
                             </code>
-                        </p>
+                        </p> */}
                         <p>
                             • Each service card contains its specific API
                             endpoint in the component props
                         </p>
-                        <p>
+                        {/* <p>
                             • WebSocket connection for real-time chat:{" "}
                             <code className="bg-gray-800 px-2 py-1 rounded">
                                 // Insert WebSocket URL here
                             </code>
-                        </p>
+                        </p> */}
                     </div>
                 </div>
             </main>

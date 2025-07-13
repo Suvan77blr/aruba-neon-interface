@@ -25,7 +25,7 @@ export default function AdminPanel() {
         ]);
 
     const trigger = async (endpoint: string, options: RequestInit = {}) => {
-        logMessage(`Calling ${endpoint}...`);
+        logMessage(`Calling ${REST_ENDPOINT}${endpoint}...`);
         try {
             const res = await fetch(
                 `${API_BASE_URL}${REST_ENDPOINT}${endpoint}`,
@@ -37,7 +37,7 @@ export default function AdminPanel() {
             const data = await res.json();
             logMessage(data.message || "Success.");
         } catch (err) {
-            logMessage(`❌ Error on ${endpoint}: ${err}`);
+            logMessage(`Error on ${endpoint}: ${err}`);
         }
     };
 
@@ -64,7 +64,7 @@ export default function AdminPanel() {
                 <Card>
                     <CardContent className="p-4">
                         <h2 className="text-xl font-semibold mb-2">
-                            🔁 Full System Reset
+                            Full System Reset
                         </h2>
                         <p className="text-sm mb-4">
                             Resets vector DB, ingestion tracking, and update
@@ -83,7 +83,7 @@ export default function AdminPanel() {
                 <Card>
                     <CardContent className="p-4">
                         <h2 className="text-xl font-semibold mb-2">
-                            🧹 Clear Scraper Cache
+                            Clear Scraper Cache
                         </h2>
                         <p className="text-sm mb-4">
                             Clears diskcache used by the scraper.
@@ -98,7 +98,7 @@ export default function AdminPanel() {
                 <Card>
                     <CardContent className="p-4">
                         <h2 className="text-xl font-semibold mb-2">
-                            🔥 Warm Cache
+                            Warm Cache
                         </h2>
                         <p className="text-sm mb-4">
                             Preloads and caches known vendor URLs (Arista,
@@ -113,9 +113,7 @@ export default function AdminPanel() {
                 {/* Ingest JSON */}
                 <Card>
                     <CardContent className="p-4 space-y-4">
-                        <h2 className="text-xl font-semibold">
-                            📥 Ingest JSON
-                        </h2>
+                        <h2 className="text-xl font-semibold">Ingest JSON</h2>
                         <div>
                             <Label>JSON File Path</Label>
                             <Input
@@ -154,7 +152,7 @@ export default function AdminPanel() {
                 <Card>
                     <CardContent className="p-4">
                         <h2 className="text-xl font-semibold mb-2">
-                            🔄 Start Update Checker
+                            Start Update Checker
                         </h2>
                         <p className="text-sm mb-4">
                             Starts the background update checker.
@@ -170,7 +168,7 @@ export default function AdminPanel() {
 
             {/* Logs */}
             <div className="mt-10">
-                <h2 className="text-xl font-semibold mb-3">📋 Logs</h2>
+                <h2 className="text-xl font-semibold mb-3">Logs</h2>
                 <Textarea
                     value={log.join("\n")}
                     readOnly

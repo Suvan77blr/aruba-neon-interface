@@ -20,6 +20,7 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion";
 import { MermaidViewer } from "@/components/MermaidViewer";
+import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -76,10 +77,7 @@ const TopologyAnalyzer = () => {
             );
 
             const data = await res.json();
-            console.log(
-                "🔍 Raw Server Response (Full Topology Analysis):",
-                data
-            ); // <--- log here
+            console.log("Raw Server Response (Full Topology Analysis):", data); // <--- log here
 
             setResult(data);
             setTimeout(() => mermaid.run(), 100); // allow DOM to render
@@ -168,7 +166,7 @@ const TopologyAnalyzer = () => {
                             >
                                 <AccordionItem value="summary">
                                     <AccordionTrigger className="text-neon-blue">
-                                        📊 Executive Summary & Analysis
+                                        Executive Summary & Analysis
                                     </AccordionTrigger>
                                     <AccordionContent className="space-y-3">
                                         <p className="text-white">
@@ -177,7 +175,7 @@ const TopologyAnalyzer = () => {
 
                                         <div className="border-t border-gray-700 pt-4">
                                             <h3 className="text-lg font-semibold text-neon-cyan mb-2">
-                                                🔍 AI Analysis & Justification
+                                                AI Analysis & Justification
                                             </h3>
                                             <div
                                                 // className="prose prose-invert max-w-none"
@@ -190,7 +188,7 @@ const TopologyAnalyzer = () => {
 
                                         <div className="border-t border-gray-700 pt-4 space-y-1">
                                             <p>
-                                                📈{" "}
+                                                {" "}
                                                 <strong>
                                                     Total Replacements:
                                                 </strong>{" "}
@@ -199,7 +197,7 @@ const TopologyAnalyzer = () => {
                                                     "Not specified"}
                                             </p>
                                             <p>
-                                                📋{" "}
+                                                {" "}
                                                 <strong>
                                                     Implementation Phases:
                                                 </strong>{" "}
@@ -209,12 +207,14 @@ const TopologyAnalyzer = () => {
                                                     : "TBD"}
                                             </p>
                                             <p>
-                                                ⚠️ <strong>Risk Level:</strong>{" "}
+                                                <strong>Risk Level:</strong>{" "}
                                                 Medium
                                             </p>
                                             <p>
-                                                💰{" "}
-                                                <strong>Cost Category:</strong>{" "}
+                                                {" "}
+                                                <strong>
+                                                    Cost Category:
+                                                </strong>{" "}
                                                 Not specified
                                             </p>
                                         </div>
@@ -223,7 +223,7 @@ const TopologyAnalyzer = () => {
 
                                 <AccordionItem value="explanation">
                                     <AccordionTrigger className="text-neon-blue">
-                                        🧠 Topology Explanation
+                                        Topology Explanation
                                     </AccordionTrigger>
                                     <AccordionContent className="text-white space-y-4 [&_h3]:text-lg [&_h3]:font-bold [&_p]:mb-3">
                                         {result.topology_explanation}
@@ -232,22 +232,19 @@ const TopologyAnalyzer = () => {
 
                                 <AccordionItem value="rag">
                                     <AccordionTrigger className="text-neon-blue">
-                                        📖 RAG Justification
+                                        Agentic-RAG Justification
                                     </AccordionTrigger>
+
                                     <AccordionContent>
-                                        <div
-                                            // className="prose prose-invert"
-                                            className="text-white space-y-4 [&_h3]:text-lg [&_h3]:font-bold [&_p]:mb-3"
-                                            dangerouslySetInnerHTML={{
-                                                __html: result.context_sources,
-                                            }}
+                                        <MarkdownRenderer
+                                            content={result.context_sources}
                                         />
                                     </AccordionContent>
                                 </AccordionItem>
 
                                 <AccordionItem value="diagrams">
                                     <AccordionTrigger className="text-neon-blue">
-                                        🖼️ Topology Diagrams
+                                        Topology Diagrams
                                     </AccordionTrigger>
                                     <AccordionContent className="text-white space-y-4 [&_h3]:text-lg [&_h3]:font-bold [&_p]:mb-3">
                                         <MermaidViewer
@@ -276,15 +273,15 @@ const TopologyAnalyzer = () => {
                                         <pre className="bg-gray-900 p-4 rounded mb-4">
                                             {result.diagrams?.modified}
                                         </pre> */}
-                                        <pre className="bg-gray-900 p-4 rounded">
+                                        {/* <pre className="bg-gray-900 p-4 rounded">
                                             {result.diagrams?.comparison}
-                                        </pre>
+                                        </pre> */}
                                     </AccordionContent>
                                 </AccordionItem>
 
                                 <AccordionItem value="modifications">
                                     <AccordionTrigger className="text-neon-blue">
-                                        🔧 Modification Details
+                                        Modification Details
                                     </AccordionTrigger>
                                     <AccordionContent>
                                         <p>
@@ -299,7 +296,7 @@ const TopologyAnalyzer = () => {
 
                                 <AccordionItem value="proposed-infrastructure">
                                     <AccordionTrigger className="text-neon-blue">
-                                        ✨ Proposed Infra with Replacements
+                                        Proposed Infra with Replacements
                                     </AccordionTrigger>
                                     <AccordionContent
                                         // className="text-white space-y-3"
@@ -320,8 +317,7 @@ const TopologyAnalyzer = () => {
                                                             !!device.notes;
                                                         return (
                                                             <li key={index}>
-                                                                {isReplaced &&
-                                                                    "🔄 "}
+                                                                {isReplaced}
                                                                 <strong>
                                                                     {device.id}
                                                                 </strong>
@@ -353,7 +349,7 @@ const TopologyAnalyzer = () => {
 
                                 <AccordionItem value="modification-impact">
                                     <AccordionTrigger className="text-neon-blue">
-                                        🧩 Topology Modification Impact
+                                        Topology Modification Impact
                                     </AccordionTrigger>
                                     <AccordionContent className="text-white space-y-3">
                                         <p>
@@ -387,7 +383,7 @@ const TopologyAnalyzer = () => {
 
                                 {/* <AccordionItem value="cost-analysis">
                                     <AccordionTrigger className="text-neon-blue">
-                                        💰 Cost Analysis
+                                        Cost Analysis
                                     </AccordionTrigger>
                                     <AccordionContent className="text-white space-y-3">
                                         <p>
@@ -431,7 +427,7 @@ const TopologyAnalyzer = () => {
 
                                 <AccordionItem value="impl">
                                     <AccordionTrigger className="text-neon-blue">
-                                        🛠️ Implementation Guidance
+                                        Implementation Guidance
                                     </AccordionTrigger>
                                     <AccordionContent>
                                         <p>
@@ -445,7 +441,7 @@ const TopologyAnalyzer = () => {
 
                                 <AccordionItem value="replacements">
                                     <AccordionTrigger className="text-neon-blue">
-                                        💡 Detailed Device Replacement
+                                        Detailed Device Replacement
                                         Recommendations
                                     </AccordionTrigger>
                                     <AccordionContent
@@ -459,8 +455,7 @@ const TopologyAnalyzer = () => {
                                                     className="border border-gray-700 p-4 rounded-lg bg-black/40"
                                                 >
                                                     <h3 className="text-lg font-semibold text-neon-blue mb-2">
-                                                        🔄 Replacement{" "}
-                                                        {index + 1}
+                                                        Replacement {index + 1}
                                                     </h3>
                                                     <p>
                                                         <strong>
@@ -526,7 +521,7 @@ const TopologyAnalyzer = () => {
                                 }}
                                 className="mt-6 bg-neon-cyan text-black hover:bg-neon-blue"
                             >
-                                📥 Download Full Report
+                                Download Full Report
                             </Button>
                         </CardContent>
                     </Card>
@@ -540,7 +535,7 @@ const TopologyAnalyzer = () => {
                 <Card className="glass-morphism mt-8">
                     <CardHeader>
                         <CardTitle className="text-neon-orange">
-                            🔧 API Integration
+                            API Integration
                         </CardTitle>
                     </CardHeader>
                     <CardContent>

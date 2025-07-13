@@ -146,10 +146,11 @@ const RagQueryPage = () => {
                         </div>
                         <div>
                             <h1 className="text-3xl font-bold neon-text">
-                                RAG Search
+                                Agentic-RAG Search
                             </h1>
                             <p className="text-gray-400">
-                                Powered by Retrieval-Augmented Generation (RAG)
+                                Powered by Agentic-RAG Technique
+                                (Retrieval-Augmented-Generation)
                             </p>
                         </div>
                     </div>
@@ -159,7 +160,9 @@ const RagQueryPage = () => {
                 <Card className="glass-morphism mb-8">
                     <CardHeader>
                         <CardTitle className="text-neon-blue">Search</CardTitle>
-                        <CardDescription>Enter your RAG-query</CardDescription>
+                        <CardDescription>
+                            Enter your Agentic-RAG query
+                        </CardDescription>
                     </CardHeader>
                     <CardContent>
                         <div className="flex gap-4">
@@ -195,7 +198,7 @@ const RagQueryPage = () => {
                 {results.length > 0 && (
                     <div className="space-y-4">
                         <h2 className="text-xl font-bold text-neon-blue">
-                            RAG Output
+                            Agentic-RAG Output
                         </h2>
                         {results.map((result) => (
                             <Card
